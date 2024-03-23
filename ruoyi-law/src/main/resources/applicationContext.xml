@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 定义一个名为 "myBean" 的 bean -->
+    <bean id="Key" class="com.ruoyi.law.domain.Key">
+        <!-- 设置 bean 的属性 -->
+        <property name="key1" value="key1"/>
+        <property name="key2" value="key2"/>
+        <property name="key3" value="key3"/>
+        <property name="key4" value="key4"/>
+        <property name="key5" value="key5"/>
+    </bean>
+
+    <!-- 定义另一个名为 "anotherBean" 的 bean -->
+<!--    <bean id="anotherBean" class="com.example.AnotherBean">-->
+<!--        &lt;!&ndash; 设置 bean 的属性 &ndash;&gt;-->
+<!--        <property name="property3" value="value3"/>-->
+<!--    </bean>-->
+</beans>

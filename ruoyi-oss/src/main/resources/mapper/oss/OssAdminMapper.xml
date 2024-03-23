@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.oss.mapper.OssAdminMapper">
+    
+    <resultMap type="OssAdmin" id="OssAdminResult">
+        <result property="adminId"    column="admin_id"    />
+        <result property="adminPassword"    column="admin_password"    />
+        <result property="adminCreateTime"    column="admin_create_time"    />
+        <result property="adminRole"    column="admin_role"    />
+        <result property="isDeleted"    column="is_deleted"    />
+    </resultMap>
+
+    <sql id="selectOssAdminVo">
+        select admin_id, admin_password, admin_create_time, admin_role, is_deleted from oss_admin
+    </sql>
+
+    <select id="selectOssAdminList" parameterType="OssAdmin" resultMap="OssAdminResult">
+        <include refid="selectOssAdminVo"/>
+        <where>  
+            <if test="adminPassword != null  and adminPassword != ''"> and admin_password = #{adminPassword}</if>
+            <if test="adminCreateTime != null "> and admin_create_time = #{adminCreateTime}</if>
+            <if test="adminRole != null "> and admin_role = #{adminRole}</if>
+            <if test="isDeleted != null  and isDeleted != ''"> and is_deleted = #{isDeleted}</if>
+        </where>
+    </select>
+    
+    <select id="selectOssAdminByAdminId" parameterType="Long" resultMap="OssAdminResult">
+        <include refid="selectOssAdminVo"/>
+        where admin_id = #{adminId}
+    </select>
+        
+    <insert id="insertOssAdmin" parameterType="OssAdmin">
+        insert into oss_admin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="adminId != null">admin_id,</if>
+            <if test="adminPassword != null and adminPassword != ''">admin_password,</if>
+            <if test="adminCreateTime != null">admin_create_time,</if>
+            <if test="adminRole != null">admin_role,</if>
+            <if test="isDeleted != null and isDeleted != ''">is_deleted,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="adminId != null">#{adminId},</if>
+            <if test="adminPassword != null and adminPassword != ''">#{adminPassword},</if>
+            <if test="adminCreateTime != null">#{adminCreateTime},</if>
+            <if test="adminRole != null">#{adminRole},</if>
+            <if test="isDeleted != null and isDeleted != ''">#{isDeleted},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOssAdmin" parameterType="OssAdmin">
+        update oss_admin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="adminPassword != null and adminPassword != ''">admin_password = #{adminPassword},</if>
+            <if test="adminCreateTime != null">admin_create_time = #{adminCreateTime},</if>
+            <if test="adminRole != null">admin_role = #{adminRole},</if>
+            <if test="isDeleted != null and isDeleted != ''">is_deleted = #{isDeleted},</if>
+        </trim>
+        where admin_id = #{adminId}
+    </update>
+
+    <delete id="deleteOssAdminByAdminId" parameterType="Long">
+        delete from oss_admin where admin_id = #{adminId}
+    </delete>
+
+    <delete id="deleteOssAdminByAdminIds" parameterType="String">
+        delete from oss_admin where admin_id in 
+        <foreach item="adminId" collection="array" open="(" separator="," close=")">
+            #{adminId}
+        </foreach>
+    </delete>
+</mapper>

@@ -8,8 +8,9 @@ from torchvision.models import ResNet50_Weights
 import argparse
 import sys
 from torchvision.models import DenseNet121_Weights
+import time
 sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf-8', buffering=1)
-
+start_time = time.time()
 
 class Resnet(nn.Module):
     def __init__(self, model, num_classes):
@@ -77,7 +78,7 @@ def load_densenet121_model():
     model = models.densenet121(weights=weights)
     densenet_model = Densenet(model=model,num_classes=num_classes)
     
-    model_path = 'checkpoint/densenet121_best_0.9639.pth.tar'
+    model_path = "E:\\RuoYi\\RuoYi-Vue\\ruoyi-admin\\src\\main\\resources\\checkpoint\\densenet121_0.9639_54.pth.tar"
     checkpoint = torch.load(model_path,map_location='cpu')
     densenet_model.load_state_dict(checkpoint['state_dict'])
     
@@ -89,7 +90,7 @@ def load_resnet50_model():
     model = models.resnet50(weights=weights)
     resnet_model = Resnet(model, num_classes)
 
-    model_path = "E:\\admin\\src\\main\\resources\\checkpoint\\resnet50_best_0.9800.pth.tar"
+    model_path = "E:\\RuoYi\\RuoYi-Vue\\ruoyi-admin\\src\\main\\resources\\checkpoint\\resnet50_best_0.9800.pth.tar"
     checkpoint = torch.load(model_path, map_location='cpu')
     resnet_model.load_state_dict(checkpoint['state_dict'])
 
@@ -122,6 +123,7 @@ def predict(image_path, label_lis, model, t=0.9):
 
 
 if __name__ == "__main__":
+    
     parser = argparse.ArgumentParser(description='Predict species from an image.')
     parser.add_argument('--image_path',type=str, help='Path to the image file.')
     args = parser.parse_args()
@@ -142,12 +144,19 @@ if __name__ == "__main__":
     model = load_densenet121_model()
     model = model.eval()
     t = 0.95
-    print(len(label_lis))
+    # print(len(label_lis))
     image_path = args.image_path
+    # image_path = r"D:\\002.jpg"
+    # print(f"image_path: {image_path}")
     result, score = predict(image_path, label_lis, model, t)
+
+    
+    
 
     if score <= t:
         print("非入侵物种!")
     else:
         # print("疑似：", result, '相似度：', score)
-        print(result,score)
+        print(result)
+    end_time = time.time()
+    print(f"Python脚本运行时间: {end_time - start_time} seconds")

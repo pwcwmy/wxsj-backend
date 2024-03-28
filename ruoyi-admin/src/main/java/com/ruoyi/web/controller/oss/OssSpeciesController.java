@@ -23,9 +23,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 物种数据库信息Controller
- * 
+ *
  * @author pwc
- * @date 2024-02-01
+ * @date 2024-03-29
  */
 @RestController
 @RequestMapping("/oss/species")
@@ -96,7 +96,7 @@ public class OssSpeciesController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('oss:species:remove')")
     @Log(title = "物种数据库信息", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(ossSpeciesService.deleteOssSpeciesByIds(ids));

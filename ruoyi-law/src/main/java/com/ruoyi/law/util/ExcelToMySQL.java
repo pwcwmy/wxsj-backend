@@ -17,7 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelToMySQL {
 
     public static void main(String[] args) {
-        String excelFilePath = "D:\\大三上课程\\万象生机\\law.xlsx";
+        String excelFilePath = "D:\\大三上课程\\万象生机\\species.xlsx";
         String mySQLUrl = "jdbc:mysql://localhost:3306/db_pss?characterEncoding=utf-8&useSSL=false";
         String mySQLUser = "root";
         String mySQLPassword = "@pwc20021015";
@@ -40,7 +40,7 @@ public class ExcelToMySQL {
                 }
             }
 
-            String tableName = "law";
+            String tableName = "oss_species";
             String createTableQuery = "CREATE TABLE IF NOT EXISTS " + tableName + " (";
             for (String columnName : columnNames) {
                 createTableQuery += columnName + " VARCHAR(255),";

@@ -9,16 +9,38 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-<!--      <el-form-item label="逻辑删除：0未删除，1已删除" prop="isDeleted">-->
-<!--        <el-select v-model="queryParams.isDeleted" placeholder="请选择逻辑删除：0未删除，1已删除" clearable>-->
-<!--          <el-option-->
-<!--            v-for="dict in dict.type.sys_normal_disable"-->
-<!--            :key="dict.value"-->
-<!--            :label="dict.label"-->
-<!--            :value="dict.value"-->
-<!--          />-->
-<!--        </el-select>-->
-<!--      </el-form-item>-->
+      <el-form-item label="物种所属的名录id" prop="belongListId">
+        <el-input
+          v-model="queryParams.belongListId"
+          placeholder="请输入物种所属的名录id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="危险等级" prop="dangerLevel">
+        <el-input
+          v-model="queryParams.dangerLevel"
+          placeholder="请输入危险等级"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="法条id" prop="lawId">
+        <el-input
+          v-model="queryParams.lawId"
+          placeholder="请输入法条id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="逻辑删除：0未删除，1已删除" prop="isDeleted">
+        <el-input
+          v-model="queryParams.isDeleted"
+          placeholder="请输入逻辑删除：0未删除，1已删除"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -73,10 +95,15 @@
 
     <el-table v-loading="loading" :data="speciesList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-<!--      <el-table-column label="物种id" align="center" prop="id" />-->
+      <el-table-column label="物种id" align="center" prop="id" />
       <el-table-column label="物种名" align="center" prop="name" />
-<!--      <el-table-column label="物种性别" align="center" prop="sex" />-->
-      <el-table-column label="物种等级" align="center" prop="flag" />
+      <el-table-column label="物种所属的名录id" align="center" prop="belongListId" />
+      <el-table-column label="物种简介" align="center" prop="speciesInfo" />
+      <el-table-column label="危险等级" align="center" prop="dangerLevel" />
+      <el-table-column label="评级依据" align="center" prop="dangerLevelReason" />
+      <el-table-column label="措施" align="center" prop="measures" />
+      <el-table-column label="法条id" align="center" prop="lawId" />
+      <el-table-column label="解决方案" align="center" prop="solution" />
       <el-table-column label="物种图片1" align="center" prop="picture1" width="100">
         <template slot-scope="scope">
           <image-preview :src="scope.row.picture1" :width="50" :height="50"/>
@@ -92,8 +119,7 @@
           <image-preview :src="scope.row.picture3" :width="50" :height="50"/>
         </template>
       </el-table-column>
-      <el-table-column label="物种信息简介" align="center" prop="speciesInfo" />
-      <el-table-column label="状态" align="center" prop="isDeleted">
+      <el-table-column label="逻辑删除：0未删除，1已删除" align="center" prop="isDeleted">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.isDeleted"/>
         </template>
@@ -132,6 +158,27 @@
         <el-form-item label="物种名" prop="name">
           <el-input v-model="form.name" placeholder="请输入物种名" />
         </el-form-item>
+        <el-form-item label="物种所属的名录id" prop="belongListId">
+          <el-input v-model="form.belongListId" placeholder="请输入物种所属的名录id" />
+        </el-form-item>
+        <el-form-item label="物种简介" prop="speciesInfo">
+          <el-input v-model="form.speciesInfo" type="textarea" placeholder="请输入内容" />
+        </el-form-item>
+        <el-form-item label="危险等级" prop="dangerLevel">
+          <el-input v-model="form.dangerLevel" placeholder="请输入危险等级" />
+        </el-form-item>
+        <el-form-item label="评级依据" prop="dangerLevelReason">
+          <el-input v-model="form.dangerLevelReason" type="textarea" placeholder="请输入内容" />
+        </el-form-item>
+        <el-form-item label="措施" prop="measures">
+          <el-input v-model="form.measures" type="textarea" placeholder="请输入内容" />
+        </el-form-item>
+        <el-form-item label="法条id" prop="lawId">
+          <el-input v-model="form.lawId" placeholder="请输入法条id" />
+        </el-form-item>
+        <el-form-item label="解决方案" prop="solution">
+          <el-input v-model="form.solution" type="textarea" placeholder="请输入内容" />
+        </el-form-item>
         <el-form-item label="物种图片1" prop="picture1">
           <image-upload v-model="form.picture1"/>
         </el-form-item>
@@ -141,17 +188,8 @@
         <el-form-item label="物种图片3" prop="picture3">
           <image-upload v-model="form.picture3"/>
         </el-form-item>
-        <el-form-item label="物种信息简介">
-          <editor v-model="form.speciesInfo" :min-height="192"/>
-        </el-form-item>
         <el-form-item label="逻辑删除：0未删除，1已删除" prop="isDeleted">
-          <el-radio-group v-model="form.isDeleted">
-            <el-radio
-              v-for="dict in dict.type.sys_normal_disable"
-              :key="dict.value"
-              :label="dict.value"
-            >{{dict.label}}</el-radio>
-          </el-radio-group>
+          <el-input v-model="form.isDeleted" placeholder="请输入逻辑删除：0未删除，1已删除" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -193,12 +231,16 @@ export default {
         pageNum: 1,
         pageSize: 10,
         name: null,
-        sex: null,
-        flag: null,
+        belongListId: null,
+        speciesInfo: null,
+        dangerLevel: null,
+        dangerLevelReason: null,
+        measures: null,
+        lawId: null,
+        solution: null,
         picture1: null,
         picture2: null,
         picture3: null,
-        speciesInfo: null,
         isDeleted: null
       },
       // 表单参数
@@ -231,12 +273,16 @@ export default {
       this.form = {
         id: null,
         name: null,
-        sex: null,
-        flag: null,
+        belongListId: null,
+        speciesInfo: null,
+        dangerLevel: null,
+        dangerLevelReason: null,
+        measures: null,
+        lawId: null,
+        solution: null,
         picture1: null,
         picture2: null,
         picture3: null,
-        speciesInfo: null,
         isDeleted: null
       };
       this.resetForm("form");

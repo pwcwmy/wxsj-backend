@@ -29,27 +29,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectLawList" parameterType="Law" resultMap="LawResult">
         <include refid="selectLawVo"/>
         <where>  
-<!--            <if test="classification != null  and classification != ''"> and classification = #{classification}</if>-->
-            <if test="key1 != null  and key1 != ''"> and key1 like concat('%', #{key1}, '%')</if>
-            <if test="key2 != null  and key2 != ''"> and key2 like concat('%', #{key2}, '%')</if>
-            <if test="key3 != null  and key3 != ''"> and key3 like concat('%', #{key3}, '%')</if>
-            <if test="key4 != null  and key4 != ''"> and key4 like concat('%', #{key4}, '%')</if>
-            <if test="key5 != null  and key5 != ''"> and key5 like concat('%', #{key5}, '%')</if>
-<!--            <if test="clause != null  and clause != ''"> and clause = #{clause}</if>-->
-<!--            <if test="content != null  and content != ''"> and content = #{content}</if>-->
-<!--            <if test="advice != null  and advice != ''"> and advice = #{advice}</if>-->
-<!--            <if test="isDeleted != null "> and is_deleted = #{isDeleted}</if>-->
+            <if test="classification != null  and classification != ''"> and classification = #{classification}</if>
+            <if test="key1 != null  and key1 != ''"> and key1 = #{key1}</if>
+            <if test="key2 != null  and key2 != ''"> and key2 = #{key2}</if>
+            <if test="key3 != null  and key3 != ''"> and key3 = #{key3}</if>
+            <if test="key4 != null  and key4 != ''"> and key4 = #{key4}</if>
+            <if test="key5 != null  and key5 != ''"> and key5 = #{key5}</if>
+            <if test="clause != null  and clause != ''"> and clause = #{clause}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="advice != null  and advice != ''"> and advice = #{advice}</if>
+            <if test="isDeleted != null "> and is_deleted = #{isDeleted}</if>
         </where>
     </select>
     
     <select id="selectLawById" parameterType="Long" resultMap="LawResult">
         <include refid="selectLawVo"/>
         where id = #{id}
-    </select>
-
-    <select id="selectLawByKeys" parameterType="Key" resultMap="LawResult">
-        <include refid="selectLawVo"/>
-        where key1 = like concat('%', #{Key.getKey1()}, '%')}
     </select>
         
     <insert id="insertLaw" parameterType="Law" useGeneratedKeys="true" keyProperty="id">

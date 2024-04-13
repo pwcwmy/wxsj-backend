@@ -1,9 +1,8 @@
 package com.ruoyi.law.mapper;
 
 import java.util.List;
-
-import com.ruoyi.law.domain.Key;
 import com.ruoyi.law.domain.Law;
+import org.springframework.stereotype.Repository;
 
 /**
  * 法律知识图谱Mapper接口
@@ -11,23 +10,16 @@ import com.ruoyi.law.domain.Law;
  * @author pwc
  * @date 2024-01-31
  */
+@Repository
 public interface LawMapper 
 {
     /**
-     * 根据主键id查询法律知识图谱
-     *
+     * 查询法律知识图谱
+     * 
      * @param id 法律知识图谱主键
      * @return 法律知识图谱
      */
     public Law selectLawById(Long id);
-
-    /**
-     * 根据keys查询法律知识图谱
-     *
-     * @param keys 法律知识图谱主键
-     * @return 法律知识图谱
-     */
-    public Law selectLawByKeys(Key keys);
 
     /**
      * 查询法律知识图谱列表
@@ -68,5 +60,4 @@ public interface LawMapper
      * @return 结果
      */
     public int deleteLawByIds(Long[] ids);
-
 }

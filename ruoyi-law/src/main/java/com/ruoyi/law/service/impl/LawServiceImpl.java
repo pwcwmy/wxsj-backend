@@ -33,11 +33,6 @@ public class LawServiceImpl implements ILawService
         return lawMapper.selectLawById(id);
     }
 
-    @Override
-    public Law selectLawByKeys(Key keys) {
-        return lawMapper.selectLawByKeys(keys);
-    }
-
     /**
      * 查询法律知识图谱列表
      * 
@@ -100,5 +95,8 @@ public class LawServiceImpl implements ILawService
         return lawMapper.deleteLawById(id);
     }
 
-
+    @Override
+    public String selectLawByKeys(Key keys) {
+        return null;
+    }
 }

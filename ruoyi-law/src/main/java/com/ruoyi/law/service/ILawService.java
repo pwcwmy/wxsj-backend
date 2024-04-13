@@ -14,20 +14,12 @@ import com.ruoyi.law.domain.Law;
 public interface ILawService 
 {
     /**
-     * 根据主键id查询法律知识图谱
+     * 查询法律知识图谱
      * 
      * @param id 法律知识图谱主键
      * @return 法律知识图谱
      */
     public Law selectLawById(Long id);
-
-    /**
-     * 根据keys查询法律知识图谱
-     *
-     * @param keys 法律知识图谱关键词
-     * @return 法律知识图谱
-     */
-    public Law selectLawByKeys(Key keys);
 
     /**
      * 查询法律知识图谱列表
@@ -69,4 +61,5 @@ public interface ILawService
      */
     public int deleteLawById(Long id);
 
+    String selectLawByKeys(Key keys);
 }

@@ -144,19 +144,10 @@ if __name__ == "__main__":
     model = load_densenet121_model()
     model = model.eval()
     t = 0.95
-    # print(len(label_lis))
     image_path = args.image_path
-    # image_path = r"D:\\002.jpg"
-    # print(f"image_path: {image_path}")
     result, score = predict(image_path, label_lis, model, t)
-
-    
-    
-
     if score <= t:
-        print("非入侵物种!")
+        print("不属于外来入侵物种")
     else:
-        # print("疑似：", result, '相似度：', score)
         print(result)
     end_time = time.time()
-    print(f"Python脚本运行时间: {end_time - start_time} seconds")

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.law.mapper.QuestionMapper">
+    
+    <resultMap type="Question" id="QuestionResult">
+        <result property="id"    column="id"    />
+        <result property="question1"    column="question1"    />
+        <result property="question2"    column="question2"    />
+        <result property="question3"    column="question3"    />
+        <result property="question4"    column="question4"    />
+        <result property="question5"    column="question5"    />
+        <result property="question6"    column="question6"    />
+        <result property="legalLiability"    column="legal_liability"    />
+    </resultMap>
+
+    <sql id="selectQuestionVo">
+        select id, question1, question2, question3, question4, question5, question6, legal_liability from question
+    </sql>
+
+    <select id="selectQuestionList" parameterType="Question" resultMap="QuestionResult">
+        <include refid="selectQuestionVo"/>
+        <where>  
+            <if test="question1 != null  and question1 != ''"> and question1 like concat('%', #{question1}, '%')</if>
+            <if test="question2 != null  and question2 != ''"> and question2 like concat('%', #{question2}, '%')</if>
+            <if test="question3 != null  and question3 != ''"> and question3 like concat('%', #{question3}, '%')</if>
+            <if test="question4 != null  and question4 != ''"> and question4 like concat('%', #{question4}, '%')</if>
+            <if test="question5 != null  and question5 != ''"> and question5 like concat('%', #{question5}, '%')</if>
+            <if test="question6 != null  and question6 != ''"> and question6 like concat('%', #{question6}, '%')</if>
+            <if test="legalLiability != null  and legalLiability != ''"> and legal_liability like concat('%', #{legalLiability}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectQuestionById" parameterType="String" resultMap="QuestionResult">
+        <include refid="selectQuestionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertQuestion" parameterType="Question">
+        insert into question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="question1 != null">question1,</if>
+            <if test="question2 != null">question2,</if>
+            <if test="question3 != null">question3,</if>
+            <if test="question4 != null">question4,</if>
+            <if test="question5 != null">question5,</if>
+            <if test="question6 != null">question6,</if>
+            <if test="legalLiability != null">legal_liability,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="question1 != null">#{question1},</if>
+            <if test="question2 != null">#{question2},</if>
+            <if test="question3 != null">#{question3},</if>
+            <if test="question4 != null">#{question4},</if>
+            <if test="question5 != null">#{question5},</if>
+            <if test="question6 != null">#{question6},</if>
+            <if test="legalLiability != null">#{legalLiability},</if>
+         </trim>
+    </insert>
+
+    <update id="updateQuestion" parameterType="Question">
+        update question
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="question1 != null">question1 = #{question1},</if>
+            <if test="question2 != null">question2 = #{question2},</if>
+            <if test="question3 != null">question3 = #{question3},</if>
+            <if test="question4 != null">question4 = #{question4},</if>
+            <if test="question5 != null">question5 = #{question5},</if>
+            <if test="question6 != null">question6 = #{question6},</if>
+            <if test="legalLiability != null">legal_liability = #{legalLiability},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteQuestionById" parameterType="String">
+        delete from question where id = #{id}
+    </delete>
+
+    <delete id="deleteQuestionByIds" parameterType="String">
+        delete from question where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

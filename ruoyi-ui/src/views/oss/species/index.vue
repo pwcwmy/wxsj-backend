@@ -9,10 +9,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="物种所属的名录id" prop="belongListId">
+      <el-form-item label="所属名录" prop="belongListId" width = “100”>
         <el-input
           v-model="queryParams.belongListId"
-          placeholder="请输入物种所属的名录id"
+          placeholder="请输入物种所属名录"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -29,14 +29,6 @@
         <el-input
           v-model="queryParams.lawId"
           placeholder="请输入法条id"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="逻辑删除：0未删除，1已删除" prop="isDeleted">
-        <el-input
-          v-model="queryParams.isDeleted"
-          placeholder="请输入逻辑删除：0未删除，1已删除"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -94,36 +86,36 @@
     </el-row>
 
     <el-table v-loading="loading" :data="speciesList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="物种id" align="center" prop="id" />
-      <el-table-column label="物种名" align="center" prop="name" />
-      <el-table-column label="物种所属的名录id" align="center" prop="belongListId" />
-      <el-table-column label="物种简介" align="center" prop="speciesInfo" />
-      <el-table-column label="危险等级" align="center" prop="dangerLevel" />
-      <el-table-column label="评级依据" align="center" prop="dangerLevelReason" />
-      <el-table-column label="措施" align="center" prop="measures" />
-      <el-table-column label="法条id" align="center" prop="lawId" />
+      <el-table-column type="selection" width="30" align="center" />
+      <el-table-column label="序号" width="50" align="center" prop="id" />
+      <el-table-column label="物种名"  align="center" prop="name" />
+      <el-table-column label="物种所属名录" align="center" prop="belongListId" />
+      <el-table-column label="简介" align="center" prop="speciesInfo" />
+      <el-table-column label="危险等级" width="60" align="center" prop="dangerLevel" />
+<!--      <el-table-column label="评级依据" align="center" prop="dangerLevelReason" />-->
+<!--      <el-table-column label="措施" align="center" prop="measures" />-->
+      <el-table-column label="法条序号" width="50" align="center" prop="lawId" />
       <el-table-column label="解决方案" align="center" prop="solution" />
       <el-table-column label="物种图片1" align="center" prop="picture1" width="100">
         <template slot-scope="scope">
           <image-preview :src="scope.row.picture1" :width="50" :height="50"/>
         </template>
       </el-table-column>
-      <el-table-column label="物种图片2" align="center" prop="picture2" width="100">
-        <template slot-scope="scope">
-          <image-preview :src="scope.row.picture2" :width="50" :height="50"/>
-        </template>
-      </el-table-column>
-      <el-table-column label="物种图片3" align="center" prop="picture3" width="100">
-        <template slot-scope="scope">
-          <image-preview :src="scope.row.picture3" :width="50" :height="50"/>
-        </template>
-      </el-table-column>
-      <el-table-column label="逻辑删除：0未删除，1已删除" align="center" prop="isDeleted">
-        <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.isDeleted"/>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="物种图片2" align="center" prop="picture2" width="100">-->
+<!--        <template slot-scope="scope">-->
+<!--          <image-preview :src="scope.row.picture2" :width="50" :height="50"/>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="物种图片3" align="center" prop="picture3" width="100">-->
+<!--        <template slot-scope="scope">-->
+<!--          <image-preview :src="scope.row.picture3" :width="50" :height="50"/>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="逻辑删除：0未删除，1已删除" align="center" prop="isDeleted">-->
+<!--        <template slot-scope="scope">-->
+<!--          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.isDeleted"/>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -158,7 +150,7 @@
         <el-form-item label="物种名" prop="name">
           <el-input v-model="form.name" placeholder="请输入物种名" />
         </el-form-item>
-        <el-form-item label="物种所属的名录id" prop="belongListId">
+        <el-form-item label="物种所属名录" prop="belongListId">
           <el-input v-model="form.belongListId" placeholder="请输入物种所属的名录id" />
         </el-form-item>
         <el-form-item label="物种简介" prop="speciesInfo">

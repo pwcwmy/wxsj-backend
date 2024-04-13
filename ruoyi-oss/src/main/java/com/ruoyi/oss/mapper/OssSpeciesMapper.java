@@ -2,6 +2,9 @@ package com.ruoyi.oss.mapper;
 
 import java.util.List;
 import com.ruoyi.oss.domain.OssSpecies;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
 
 /**
  * 物种数据库信息Mapper接口
@@ -9,6 +12,7 @@ import com.ruoyi.oss.domain.OssSpecies;
  * @author pwc
  * @date 2024-03-29
  */
+@Repository
 public interface OssSpeciesMapper
 {
     /**

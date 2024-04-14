@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectQuestionList" parameterType="Question" resultMap="QuestionResult">
         <include refid="selectQuestionVo"/>
-        <where>  
+        <where>
+            <if test="id != null  and id != ''"> and id = #{id}</if>
             <if test="question1 != null  and question1 != ''"> and question1 like concat('%', #{question1}, '%')</if>
             <if test="question2 != null  and question2 != ''"> and question2 like concat('%', #{question2}, '%')</if>
             <if test="question3 != null  and question3 != ''"> and question3 like concat('%', #{question3}, '%')</if>

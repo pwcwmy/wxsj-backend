@@ -1,6 +1,54 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="80px">
+      <el-form-item label="问题1答案" prop="question1">
+        <el-input
+          v-model="queryParams.question1"
+          placeholder="请输入问题1答案"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="问题2答案" prop="question2">
+        <el-input
+          v-model="queryParams.question2"
+          placeholder="请输入问题2答案"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="问题3答案" prop="question3">
+        <el-input
+          v-model="queryParams.question3"
+          placeholder="请输入问题3答案"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="问题4答案" prop="question4">
+        <el-input
+          v-model="queryParams.question4"
+          placeholder="请输入问题4答案"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="问题5答案" prop="question5">
+        <el-input
+          v-model="queryParams.question5"
+          placeholder="请输入问题5答案"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="问题6答案" prop="question6">
+        <el-input
+          v-model="queryParams.question6"
+          placeholder="请输入问题6答案"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>

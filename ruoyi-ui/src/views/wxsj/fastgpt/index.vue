@@ -1,9 +1,7 @@
 <template>
   <div class="chat-container">
-    <h1 class="chat-title" style="align-content: center">Wxsj-GPT  万象生机问答大模型</h1>
-<!--    <p class="chat-subtitle" text-align="middle">万象生机问答大模型</p>-->
+    <h1 class="chat-title" style="align-content: center">WXSJ-GPT  万象生机问答大模型</h1>
     <div class="chat-box" ref="chatBox">
-      <!-- Messages will be appended here -->
       <div v-for="message in messages" :key="message.id" class="message">
         <div v-if="message.role === 'user'" class="user-message">
           <div class="text">{{ message.content }}</div>
@@ -25,7 +23,7 @@ export default {
     return {
       userMessage: '',
       messages: [],
-      api_key: 'fastgpt-yxQqHp0kTB9TQLruX6QeCPng43U6HTy7fDp9XTJWfCqnE6UT6gfhBzZbj',
+      api_key: 'fastgpt-FOSPA5pitOF8FNuamo6lCUeSuurSo2rf2SQ0tSASVWHHO38KFHUx',
       chat_id: 'abcd'
     };
   },
@@ -106,7 +104,7 @@ body {
 }
 
 .chat-box {
-  width: 100%;
+  width: 99%;
   max-height: 800px;
   height: 500px;
   overflow-y: auto;
@@ -123,8 +121,11 @@ body {
 }
 
 .user-message {
-  flex-direction: column;
-  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: flex-start; /* 这将使 .user-message 内的元素靠左对齐 */
+  margin-bottom: 10px;
 }
 
 .user-message .text {
@@ -132,16 +133,26 @@ body {
   color: white;
   padding: 10px;
   border-radius: 5px;
-  max-width: 70%;
+  /* max-width: 70%; 这里不需要设置，因为我们使用了flex布局 */
   text-align: left;
+  margin-right: auto; /* 这将使.text元素靠左对齐，因为它是flex容器内的第一个元素 */
+}
+
+.bot-message {
+  display: flex;
+  flex-direction: row-reverse; /* 这将使flex容器内的内容反向排列 */
+  align-items: start;
+  justify-content: flex-end; /* 这将使 .bot-message 内的元素靠右对齐 */
+  margin-bottom: 10px;
 }
 
 .bot-message .text {
   background: #e9ecef;
   padding: 10px;
   border-radius: 5px;
-  max-width: 70%;
-  text-align: right;
+  /* max-width: 70%; 这里不需要设置，因为我们使用了flex布局 */
+  text-align: left;
+  margin-left: auto; /* 这将使.text元素靠右对齐，因为它是flex容器内的第一个元素 */
 }
 
 input[type="text"] {

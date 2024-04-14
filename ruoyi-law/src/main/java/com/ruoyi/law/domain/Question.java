@@ -13,6 +13,20 @@ import com.ruoyi.common.core.domain.BaseEntity;
  */
 public class Question extends BaseEntity
 {
+    public Question() {
+    }
+
+    public Question(String id, String question1, String question2, String question3, String question4, String question5, String question6, String legalLiability) {
+        this.id = id;
+        this.question1 = question1;
+        this.question2 = question2;
+        this.question3 = question3;
+        this.question4 = question4;
+        this.question5 = question5;
+        this.question6 = question6;
+        this.legalLiability = legalLiability;
+    }
+
     private static final long serialVersionUID = 1L;
 
     /** 答案组合id */

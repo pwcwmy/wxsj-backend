@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.wxsj;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.annotation.Anonymous;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +39,7 @@ public class QuestionController extends BaseController
     /**
      * 查询问卷答案组合列表
      */
-    @PreAuthorize("@ss.hasPermi('wxsj:question:list')")
+    @Anonymous
     @GetMapping("/list")
     public TableDataInfo list(Question question)
     {
